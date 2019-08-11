@@ -1,0 +1,12 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "dev:ele": "lerna run serve:ele",
+    "dev:iview": "lerna run serve:iview",
+    "dev:antd": "lerna run serve:antd"
+  },
+  "devDependencies": {
+    "lerna": "^3.13.4"
+  }
+}
