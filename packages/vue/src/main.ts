@@ -1,3 +1,11 @@
+/**
+ *  @aqua-gui/vue
+ *
+ *  处理数据层
+ *
+ */
+
+
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';

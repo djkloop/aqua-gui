@@ -5,7 +5,7 @@
   "author": "djkloop <1044032256@qq.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "lib/utils.js",
+  "main": "lib/utils.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -18,5 +18,9 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.136",
+    "lodash": "^4.17.15"
   }
 }

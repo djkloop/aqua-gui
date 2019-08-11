@@ -1,11 +1,10 @@
 {
-  "name": "@aqua-gui/config",
+  "name": "@aqua-gui/style",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "djkloop <1044032256@qq.com>",
-  "homepage": "",
+  "homepage": "https://github.com/djkloop/aqua-gui#readme",
   "license": "ISC",
-  "main": "lib/config.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -16,7 +15,14 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djkloop/aqua-gui.git"
+  },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/djkloop/aqua-gui/issues"
   }
 }

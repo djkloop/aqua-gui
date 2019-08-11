@@ -34,6 +34,10 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
+  "typeRoots":[
+    "./node_modules/element-ui/types",
+    "/typings/index.d.ts"
+  ],
   "exclude": [
     "node_modules"
   ]
