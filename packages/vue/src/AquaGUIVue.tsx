@@ -18,6 +18,7 @@ export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {
   @Prop(PropTypes.string.def('element'))
   public theme!: string;
 
+  // 一定要和上层的draggable使用同一个
   @Prop(PropTypes.any)
   public draggable!: any;
 
@@ -28,7 +29,7 @@ export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {
   public render() {
     return (
       <div>
-        <AquaGUICore />
+        <AquaGUICore draggable={this.draggable}/>
       </div>
     );
   }
