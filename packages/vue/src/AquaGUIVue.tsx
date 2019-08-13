@@ -1,20 +1,13 @@
+/**
+ *  数据处理层
+ *  负责上级(element/iView/ant....这些ui库)和下级(core)的数据处理和数据抹平
+ */
+
 import { Component, Prop } from 'vue-property-decorator';
 import * as tsx from 'vue-tsx-support';
 import PropTypes from 'vue-types';
 import AquaGUICore from '@aqua-gui/core/src/AquaGUICore';
-
-export interface RenderProps {
-  name: string;
-  tasks?: RenderProps[];
-  id?: string;
-  type?: string;
-}
-
-interface AquaGUIVueProps {
-  theme: string;
-  renderItem?: RenderProps;
-  draggable?: any;
-}
+import { RenderProps, AquaGUIVueProps } from '@aqua-gui/types';
 
 @Component
 export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {

@@ -5,13 +5,13 @@
   "author": "djkloop <1044032256@qq.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "lib/types.js",
+  "main": "src/types.ts",
   "directories": {
-    "lib": "lib",
+    "lib": "src",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "src"
   ],
   "publishConfig": {
     "access": "public"

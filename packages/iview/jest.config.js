@@ -3,7 +3,7 @@ module.exports = {
     'js',
     'jsx',
     'json',
-    'vue',
+    'Component.ts',
     'ts',
     'tsx'
   ],
