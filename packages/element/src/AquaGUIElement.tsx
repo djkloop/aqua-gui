@@ -3,6 +3,7 @@ import AquaGUIVue from '@aqua-gui/vue/src/AquaGUIVue';
 import AquaGUIHeader from './components/AquaGUIHeader';
 import AquaGUIRenderComponent from './components/AquaGUIRenderComponent';
 import { RenderProps, AquaGUIVueProps } from '@aqua-gui/types';
+import { deepClone } from '@aqua-gui/utils';
 import Draggable from 'vuedraggable';
 import Config from '@aqua-gui/config';
 const CURRENT_THEME = 'element';
@@ -10,9 +11,12 @@ const CURRENT_THEME = 'element';
 @Component
 export default class AquaGUIElement extends Vue {
   public renderComponents: any;
+  public dataList: RenderProps[] = [];
 
-  @Ref('aqua-data') readonly aquaData!: AquaGUIVue;
-  @ProvideReactive('renderItem') public renderItemData: any = '1';
+  @Ref('aqua-data') public aquaData!: AquaGUIVue;
+
+  @ProvideReactive('renderItem')
+  public ProviderRenderItem: RenderProps = {};
 
 
 
@@ -22,7 +26,7 @@ export default class AquaGUIElement extends Vue {
   }
 
   public handleOnClone(e: any) {
-    this.renderItemData = 3;
+    this.ProviderRenderItem = Object.assign(this.ProviderRenderItem, e);
     this.aquaData.handleClick();
   }
 
@@ -38,7 +42,12 @@ export default class AquaGUIElement extends Vue {
             />
           </el-aside>
           <el-main clas={'aqua-gui-main'}>
-            <AquaGUIVue ref={'aqua-data'} theme={CURRENT_THEME} draggable={Draggable} />
+            <AquaGUIVue
+                ref={'aqua-data'}
+                theme={CURRENT_THEME}
+                draggable={Draggable}
+                list={this.dataList}
+            />
           </el-main>
           <el-aside class={'aqua-gui-aside-right'} style={{width: Config.LAYOUT.ASIDE_WIDTH}}>side-right</el-aside>
         </el-container>

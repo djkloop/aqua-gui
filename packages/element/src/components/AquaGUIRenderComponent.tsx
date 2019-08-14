@@ -14,7 +14,10 @@ export interface AquaGUIRenderComponentEvents {
 }
 
 @Component
-export default class AquaGUIRenderComponent extends tsx.Component<AquaGUIRenderComponentProps, AquaGUIRenderComponentEvents> {
+export default class AquaGUIRenderComponent extends tsx.Component<
+      AquaGUIRenderComponentProps,
+      AquaGUIRenderComponentEvents
+    > {
 
   @Prop(PropTypes.object.def({}))
   public renderComponents!: object;
