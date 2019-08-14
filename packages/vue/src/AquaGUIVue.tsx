@@ -19,6 +19,7 @@ export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {
   public theme!: string;
 
   // 一定要和上层的draggable使用同一个
+  // 因为同一个对象才能互相拖拽...
   @Prop(PropTypes.any)
   public draggable!: any;
 
@@ -27,10 +28,10 @@ export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {
   }
 
   public render() {
-    return (
-      <div>
-        <AquaGUICore draggable={this.draggable}/>
-      </div>
+    return  (
+        <div class={'aqua-gui-main-data'}>
+          <AquaGUICore draggable={this.draggable}/>
+        </div>
     );
   }
 }

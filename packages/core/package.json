@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@aqua-gui/style": "^0.0.0",
+    "@aqua-gui/types": "^0.0.0",
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",

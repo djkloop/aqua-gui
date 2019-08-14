@@ -6,3 +6,8 @@ export interface RenderProps {
 }
 
 
+export interface AquaGUICoreProps {
+    draggable?: any;
+}
+
+

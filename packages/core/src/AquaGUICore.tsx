@@ -1,11 +1,8 @@
 import { Component, Prop } from 'vue-property-decorator';
 import * as tsx from 'vue-tsx-support';
 import PropTypes from 'vue-types';
+import { AquaGUICoreProps } from '@aqua-gui/types';
 
-interface AquaGUICoreProps {
-  name?: string;
-  draggable?: any;
-}
 
 @Component
 export default class AquaGUICore extends tsx.Component<AquaGUICoreProps> {
@@ -40,7 +37,6 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps> {
                 ghostClass={'ghost'}
                 class={'aqua-gui-main-core-area'}
             >
-                <div>1111</div>
             </Draggable>
         );
     }

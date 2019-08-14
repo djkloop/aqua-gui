@@ -1,7 +1,6 @@
 declare module 'vuedraggable';
 
-
-declare module '*.Component.ts' {
+declare module '*.vue' {
   import Vue from 'vue';
   export default Vue;
 }
