@@ -3,7 +3,7 @@
  *  负责上级(element/iView/ant....这些ui库)和下级(core)的数据处理和数据抹平
  */
 
-import { Component, Prop } from 'vue-property-decorator';
+import {Component, Prop, InjectReactive, Watch} from 'vue-property-decorator';
 import * as tsx from 'vue-tsx-support';
 import PropTypes from 'vue-types';
 import AquaGUICore from '@aqua-gui/core/src/AquaGUICore';
@@ -12,8 +12,7 @@ import { RenderProps, AquaGUIVueProps } from '@aqua-gui/types';
 @Component
 export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {
 
-  @Prop(PropTypes.object)
-  public renderItem!: RenderProps;
+  @InjectReactive('renderItem') public renderItemData!: any;
 
   @Prop(PropTypes.string.def('element'))
   public theme!: string;
@@ -23,14 +22,21 @@ export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {
   @Prop(PropTypes.any)
   public draggable!: any;
 
-  public created() {
-    console.log(this.theme);
+
+
+
+
+  handleClick() {
+    console.log(this.renderItemData);
   }
 
   public render() {
+    console.log(this.renderItemData);
     return  (
         <div class={'aqua-gui-main-data'}>
-          <AquaGUICore draggable={this.draggable}/>
+          <AquaGUICore
+              draggable={this.draggable}
+          />
         </div>
     );
   }

@@ -5,19 +5,16 @@ import Draggable from 'vuedraggable';
 import { deepClone, uniqueID } from '@aqua-gui/utils';
 import { VNode } from 'vue';
 
-export interface RenderProps {
-  name: string;
-  tasks?: RenderProps[];
-  id?: string;
-  type?: string;
-}
-
 export interface AquaGUIRenderComponentProps {
   renderComponents: object;
 }
 
+export interface AquaGUIRenderComponentEvents {
+  onClone: (e: any) => void;
+}
+
 @Component
-export default class AquaGUIRenderComponent extends tsx.Component<AquaGUIRenderComponentProps> {
+export default class AquaGUIRenderComponent extends tsx.Component<AquaGUIRenderComponentProps, AquaGUIRenderComponentEvents> {
 
   @Prop(PropTypes.object.def({}))
   public renderComponents!: object;
@@ -90,6 +87,7 @@ export default class AquaGUIRenderComponent extends tsx.Component<AquaGUIRenderC
   // clone之前添加一个only-key
   public handleClone(v: any) {
     v.id = uniqueID() + '_' + Date.now();
+    this.$emit('clone', deepClone(v));
     return deepClone(v);
   }
 
