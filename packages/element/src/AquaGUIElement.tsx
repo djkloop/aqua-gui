@@ -2,8 +2,7 @@ import { Component, Vue, ProvideReactive, Ref } from 'vue-property-decorator';
 import AquaGUIVue from '@aqua-gui/vue/src/AquaGUIVue';
 import AquaGUIHeader from './components/AquaGUIHeader';
 import AquaGUIRenderComponent from './components/AquaGUIRenderComponent';
-import { RenderProps, AquaGUIVueProps } from '@aqua-gui/types';
-import { deepClone } from '@aqua-gui/utils';
+import { RenderProps } from '@aqua-gui/types';
 import Draggable from 'vuedraggable';
 import Config from '@aqua-gui/config';
 const CURRENT_THEME = 'element';
@@ -13,8 +12,10 @@ export default class AquaGUIElement extends Vue {
   public renderComponents: any;
   public dataList: RenderProps[] = [];
 
+  // Ref
   @Ref('aqua-data') public aquaData!: AquaGUIVue;
 
+  // 全局参数
   @ProvideReactive('renderItem')
   public ProviderRenderItem: RenderProps = {};
 
@@ -27,7 +28,6 @@ export default class AquaGUIElement extends Vue {
 
   public handleOnClone(e: any) {
     this.ProviderRenderItem = Object.assign(this.ProviderRenderItem, e);
-    this.aquaData.handleClick();
   }
 
   public render() {
