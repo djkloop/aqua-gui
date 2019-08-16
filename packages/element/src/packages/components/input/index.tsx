@@ -16,9 +16,11 @@ export default class AquaGUIFormItemInput extends tsx.Component<AquaGUIFormItemI
 
   public render() {
     const { item } = this;
+    const { value, ...resetProps } = item;
     return (
       <el-input
         v-model={item.value}
+        placeholder={resetProps.placeholder}
       />
     );
   }

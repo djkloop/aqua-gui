@@ -4,6 +4,7 @@ export interface RenderProps {
     id?: string; // 唯一id
     type?: string; // 类型
     value?: any; //默认值
+    placeholder?: string; // 提示
 }
 
 
