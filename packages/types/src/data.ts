@@ -8,6 +8,12 @@ export interface RenderProps {
 
 export interface AquaGUICoreProps {
     draggable?: any;
+    renderList?: RenderProps[];
+    dataStore?: any;
 }
 
+
+export interface AquaGUICoreEvents {
+    onAdd: (e: any) => void
+}
 
