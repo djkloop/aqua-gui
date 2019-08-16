@@ -27,6 +27,7 @@ export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {
   public handleEmitAdd(e: any) {
     console.log(e, ' emit');
     console.log(this.list, ' emit');
+    console.log(this.renderItemData);
   }
 
   public render() {

@@ -3,6 +3,7 @@ export interface RenderProps {
     tasks?: RenderProps[]; // 子组件
     id?: string; // 唯一id
     type?: string; // 类型
+    value?: any; //默认值
 }
 
 

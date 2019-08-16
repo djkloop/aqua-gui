@@ -59,7 +59,7 @@ export default {
         labelwidth: 50,
         labelWidth: '50px',
       },
-      value: '',
+      value: '222',
       apiKey: 'name',
       fieldTypes: 'inputTypes',
       style: {

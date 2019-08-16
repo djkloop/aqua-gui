@@ -1,8 +1,9 @@
-import { Component, Prop, InjectReactive } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 import * as tsx from 'vue-tsx-support';
 import PropTypes from 'vue-types';
 import { AquaGUICoreProps, AquaGUICoreEvents, RenderProps } from '@aqua-gui/types';
 import Draggable from 'vuedraggable';
+import { AquaGUIFormItemInput } from '../components';
 
 @Component
 export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUICoreEvents> {
@@ -64,7 +65,7 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
                   data-key={item.name + '_' + index + '_' + item.id}
                   onClick={() => this.handleClick(item, index)}
                 >
-                  <p>{item.name}</p>
+                  { this.createFormItem(item) }
                 </div>
             );
           })
@@ -72,5 +73,11 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
       </Draggable>);
   }
 
+  private createFormItem(item: RenderProps) {
+    // 输入框
+    if (item.type === 'input') {
+      return <AquaGUIFormItemInput item={item}/>;
+    }
+  }
 }
 
