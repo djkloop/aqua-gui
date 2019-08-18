@@ -47,9 +47,9 @@ export default class AquaGUIRenderComponent extends tsx.Component<
                 <li
                   class={'aqua-gui-aside-component-item'}
                   data-item={JSON.stringify(item)}
-                  data-index={index + '_' + item.name}
+                  data-index={index + '_' + item.renderName}
                 >
-                  <a>{item.name}</a>
+                  <a>{item.renderName}</a>
                 </li>
               );
             })

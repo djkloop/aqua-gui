@@ -7,16 +7,20 @@ import {Component, Prop, InjectReactive} from 'vue-property-decorator';
 import * as tsx from 'vue-tsx-support';
 import PropTypes from 'vue-types';
 import AquaGUICore from '../core/AquaGUICore';
+import { namespace } from 'vuex-class';
 import { RenderProps, AquaGUIVueProps } from '@aqua-gui/types';
+
+const CommonModule = namespace('common');
 
 @Component
 export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {
 
+  @CommonModule.State((state) => state.selectItem)
+  public selectedItem!: RenderProps;
+
+  @CommonModule.Mutation('setSelectItem') public setSelectItem: any;
 
   @InjectReactive('renderItem') public renderItemData!: any;
-  // 全局参数
-  // @ProvideReactive('renderList')
-  // public ProvideRenderList: RenderProps[] = [];
 
   @Prop(PropTypes.string.def('element'))
   public theme!: string;
@@ -25,9 +29,7 @@ export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {
   public list!: RenderProps[];
 
   public handleEmitAdd(e: any) {
-    console.log(e, ' emit');
-    console.log(this.list, ' emit');
-    console.log(this.renderItemData);
+    this.setSelectItem(this.renderItemData);
   }
 
   public render() {

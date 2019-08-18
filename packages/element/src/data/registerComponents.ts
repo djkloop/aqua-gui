@@ -1,31 +1,34 @@
 export default {
   layoutComponents: [
     {
-      type: 'row',
-      name: 'Row组件',
-      originProps: {
-        gutter: 1,
-        type: 'flex',
-        justify: 'start',
-        align: 'middle',
-        tag: 'span',
-      },
+      renderType: 'row',
+      renderName: 'Row组件',
+      gutter: 1,
+      type: 'flex',
+      justify: 'start',
+      align: 'middle',
+      tag: 'div',
       customProps: {
 
       },
-      tasks: [],
+      children: [],
       componentType: 'layout',
     },
     {
       type: 'col',
+      renderType: 'col',
       name: 'Col组件',
-      tasks: [],
+      renderName: 'Col组件',
+      children: [],
       componentType: 'layout',
+      span: 12,
     },
   ],
   basicComponents: [
     {
       type: 'phone',
+      renderType: 'phone',
+      renderName: '手机号',
       name: '手机号',
       placeholder: '请输入手机号',
       showLabel: false,
@@ -49,10 +52,12 @@ export default {
       componentType: 'basic',
     },
     {
-      type: 'input',
+      renderType: 'input',
       name: '输入框(可以测试)',
+      renderName: '输入框(可以测试)',
       placeholder: '请输入姓名',
       showLabel: false,
+
       label: {
         labelTitle: '姓名',
         labelPosition: 'left',
@@ -69,6 +74,8 @@ export default {
     },
     {
       type: 'checkbox',
+      renderType: 'checkbox',
+      renderName: '选择框',
       name: '选择框',
       value: [],
       apiKey: 'shootPlace',
@@ -97,7 +104,9 @@ export default {
     },
     {
       type: 'date',
+      renderType: 'date',
       name: '日期选择器',
+      renderName: '日期选择器',
       label: {
         labelTitle: '生日',
         labelwidth: 50,
@@ -115,10 +124,12 @@ export default {
     },
     {
       type: 'select',
+      renderType: 'select',
       name: '下拉选择框',
       value: '',
       apiKey: 'educationLevel',
       placeholder: '请选择教育程度',
+      renderName: '下拉选择框',
       showLabel: true,
       label: {
         labelTitle: '教育程度',
@@ -142,6 +153,7 @@ export default {
     {
       type: 'switch',
       name: '开关',
+      renderName: '开关',
       value: false,
       label: {
         labelTitle: '是否有信用卡',
@@ -158,56 +170,10 @@ export default {
 
     },
     {
-      type: 'h-picker',
-      name: '横向滑动单选',
-      value: '',
-      options: [
-        '20',
-        '21',
-        '22',
-        '23',
-        '24',
-        '25',
-        '26',
-        '27',
-        '28',
-        '29',
-        '30',
-        '31',
-        '32',
-        '33',
-        '34',
-        '35',
-        '36',
-        '37',
-        '38',
-        '39',
-        '40',
-      ],
-      label: {
-        labelTitle: '年龄',
-        labelPosition: 'left',
-        labelwidth: 50,
-        labelWidth: '50px',
-      },
-      fieldTypes: 'hPickerTypes',
-      apiKey: 'age',
-      itemWidth: 50,
-      showNumber: 5,
-      pickerStyle: {
-        color: '#409eff',
-        fontsize: 18,
-        fontSize: '18px',
-      },
-      style: {
-        margin: '0px 0px 0px 0px',
-      },
-      componentType: 'basic',
-
-    },
-    {
       type: 'button',
+      renderType: 'button',
       name: '按钮',
+      renderName: '按钮',
       btnText: '提交',
       btnType: 'submit',
       apiKey: '',
@@ -230,6 +196,8 @@ export default {
   imgComponents: [
     {
       type: 'imgSlide',
+      renderType: 'imgSlide',
+      renderName: '图片轮播',
       name: '图片轮播',
       value: [
         {
@@ -255,7 +223,9 @@ export default {
     },
     {
       type: 'imgShow',
+      renderType: 'imgShow',
       name: '图片展示',
+      renderName: '图片展示',
       value: '',
       style: {
         margin: '0px 0px 0px 0px',
@@ -265,7 +235,9 @@ export default {
   assistComponents: [
     {
       type: 'staticText',
+      renderType: 'staticText',
       name: '文本描述',
+      renderName: '文本描述',
       value: '文本描述',
       style: {
         textAlign: 'left',
@@ -278,7 +250,9 @@ export default {
     },
     {
       type: 'splitLine',
+      renderType: 'splitLine',
       name: '分割线',
+      renderName: '分割线',
       value: 'solid',
       style: {
         borderColor: '#d3d3d3',

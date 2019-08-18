@@ -2,6 +2,7 @@ import { Component, Vue, ProvideReactive, Ref } from 'vue-property-decorator';
 import AquaGUIVue from './packages/vue/AquaGUIVue';
 import AquaGUIHeader from './components/AquaGUIHeader';
 import AquaGUIRenderComponent from './components/AquaGUIRenderComponent';
+import AquaGUIRenderConfig from './components/AquaGUIRenderConfig';
 import { RenderProps } from '@aqua-gui/types';
 import Config from '@aqua-gui/config';
 const CURRENT_THEME = 'element';
@@ -38,14 +39,16 @@ export default class AquaGUIElement extends Vue {
                 onClone={this.handleOnClone}
             />
           </el-aside>
-          <el-main clas={'aqua-gui-main'}>
+          <el-main class={'aqua-gui-main'}>
             <AquaGUIVue
                 ref={'aqua-data'}
                 theme={CURRENT_THEME}
                 list={this.dataList}
             />
           </el-main>
-          <el-aside class={'aqua-gui-aside-right'} style={{width: Config.LAYOUT.ASIDE_WIDTH}}>side-right</el-aside>
+          <el-aside class={'aqua-gui-aside-right'} style={{width: Config.LAYOUT.ASIDE_WIDTH}}>
+            <AquaGUIRenderConfig />
+          </el-aside>
         </el-container>
       </el-container>
     );
