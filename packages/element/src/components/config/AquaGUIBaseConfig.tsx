@@ -40,6 +40,8 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
   }
 
 
+  // TODO: 这个地方也是组件类型越多越没办法写。
+  // TODO: 因为每个组件的类型不同这里不知道有没有更好的实现方案.
   public render() {
     this.findRenderListItem(this.getSelectedItem);
     const { renderType } = this.getSelectedItem;
