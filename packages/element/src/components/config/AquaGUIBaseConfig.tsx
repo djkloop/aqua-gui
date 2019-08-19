@@ -12,6 +12,11 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
   @CommonModule.Getter('_selectItem') public getSelectedItem!: any;
   @CommonModule.Getter('_getRenderList') public getRenderList!: any;
 
+  // justifyList
+  public justifyList: string[] = ['start', 'end', 'center', 'space-around', 'space-between'];
+  // alignList
+  public alignList: string[] = ['top', 'middle', 'bottom'];
+
   private res: any = {};
 
   public findRenderListItem(item: RenderProps) {
@@ -54,11 +59,18 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
           <div>
             <el-form-item label='栅格间隔'>
               <el-input-number
-                key={this.res.id}
                 v-model={this.res.gutter}
                 min={0}
               />
             </el-form-item>
+            <el-form-item label='布局模式(可选 flex，现代浏览器下有效)'>
+              <el-select v-model={this.res.type} placeholder='布局模式'>
+                <el-option label={'flex'} value={'flex'} />
+              </el-select>
+            </el-form-item>
+            {
+              this.renderFlexChild(this.res.type)
+            }
           </div>
           :
           null
@@ -73,6 +85,7 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
                   key={this.res.id}
                   v-model={this.res.span}
                   min={0}
+                  max={24}
                 />
               </el-form-item>
             </div>
@@ -83,4 +96,30 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
     );
   }
 
+  private renderFlexChild(type: string) {
+    if (type === 'flex') {
+      return (
+          <div>
+            <el-form-item label='justify'>
+              <el-select v-model={this.res.justify} placeholder='flex 布局下的水平排列方式'>
+                {
+                  this.justifyList.map((item) => {
+                    return <el-option  label={item} value={item} />;
+                  })
+                }
+              </el-select>
+            </el-form-item>
+            <el-form-item label='align'>
+              <el-select v-model={this.res.align} placeholder='布局模式(可选 flex，现代浏览器下有效)'>
+                {
+                  this.alignList.map((item) => {
+                    return <el-option  label={item} value={item} />;
+                  })
+                }
+              </el-select>
+            </el-form-item>
+          </div>
+      );
+    }
+  }
 }

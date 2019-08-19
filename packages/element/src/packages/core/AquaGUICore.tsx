@@ -47,7 +47,7 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
         class={`${clsName ? clsName : 'aqua-gui-main-core-area'}`}
         animation={100}
         list={renderList}
-        tag={'div'}
+        tag={clsName ? 'div' : 'div'}
         group={ { name: 'widget' } }
         ghostClass={'ghost'}
       >
