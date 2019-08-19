@@ -3,14 +3,17 @@ import AquaGUIVue from './packages/vue/AquaGUIVue';
 import AquaGUIHeader from './components/AquaGUIHeader';
 import AquaGUIRenderComponent from './components/AquaGUIRenderComponent';
 import AquaGUIRenderConfig from './components/AquaGUIRenderConfig';
+import { namespace } from 'vuex-class';
 import { RenderProps } from '@aqua-gui/types';
 import Config from '@aqua-gui/config';
 const CURRENT_THEME = 'element';
 
+const CommonModule = namespace('common');
+
 @Component
 export default class AquaGUIElement extends Vue {
   public renderComponents: any;
-  public dataList: RenderProps[] = [];
+  @CommonModule.State((state) => state.renderList) public renderList!: RenderProps[];
 
   // Ref
   @Ref('aqua-data') public aquaData!: AquaGUIVue;
@@ -43,7 +46,7 @@ export default class AquaGUIElement extends Vue {
             <AquaGUIVue
                 ref={'aqua-data'}
                 theme={CURRENT_THEME}
-                list={this.dataList}
+                list={this.renderList}
             />
           </el-main>
           <el-aside class={'aqua-gui-aside-right'} style={{width: Config.LAYOUT.ASIDE_WIDTH}}>

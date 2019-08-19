@@ -5,6 +5,15 @@ const state: CommonState = {
     renderList: [],
 };
 
+const getters: any = {
+    _selectItem(states: CommonState) {
+        return states.selectItem;
+    },
+    _getRenderList(states: CommonState) {
+        return states.renderList;
+    },
+};
+
 const mutations = {
     setSelectItem(states: CommonState, params: RenderProps) {
         states.selectItem = params;
@@ -18,4 +27,5 @@ export default {
     namespaced: true,
     state,
     mutations,
+    getters,
 };

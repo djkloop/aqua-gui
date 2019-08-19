@@ -1,4 +1,4 @@
-import { Component, Prop } from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 import * as tsx from 'vue-tsx-support';
 import PropTypes from 'vue-types';
 import { AquaGUICoreProps, AquaGUICoreEvents, RenderProps } from '@aqua-gui/types';
@@ -14,8 +14,7 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
   public index: number = 0;
 
   @CommonModule.State((state) => state.selectItem) public selectItem!: any;
-
-
+  @CommonModule.Mutation('setSelectItem') public setSelectItem: any;
 
   @Prop(PropTypes.array.def([]))
   public renderList!: RenderProps[];
@@ -30,6 +29,7 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
     e.stopPropagation();
     this.key = item.id;
     this.index = index;
+    this.setSelectItem(item);
   }
 
   public render() {
