@@ -6,8 +6,11 @@
 ```javascript
 
 // 项目本地测试开启步骤
-// 1. yarn
-// 2. lerna bootstrap
-// 3. cd packages/element
-// 4. yarn serve:ele
+// 1. git clone git@github.com:djkloop/aqua-gui.git / git clone https://github.com/djkloop/aqua-gui.git
+// 2. cd aqua-gui
+// 3. yarn
+// 4. lerna bootstrap
+// 5. cd packages/element
+// 6. yarn serve:ele
+
 ```
