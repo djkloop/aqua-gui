@@ -21,7 +21,7 @@ export default {
       renderName: 'Col组件',
       children: [],
       componentType: 'layout',
-      span: 12,
+      span: 6,
     },
   ],
   basicComponents: [

@@ -40,14 +40,14 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
     );
   }
 
-  public createDraggableList(renderList: RenderProps[], clsName?: string) {
+  public createDraggableList(renderList: RenderProps[], clsName?: string, tagEle?: string) {
     return (
       <Draggable
         onAdd={this.handleOnAdd}
-        class={`${clsName ? clsName : 'aqua-gui-main-core-area'}`}
+        class={`${clsName ? '这是二次渲染的组件-class-能拖拽的组件必须有这一级才能拖拽-但是真正有属性的组件还在最外层' : 'aqua-gui-main-core-area'}`}
         animation={100}
         list={renderList}
-        tag={clsName ? 'div' : 'div'}
+        tag={clsName ? tagEle : 'div'}
         group={ { name: 'widget' } }
         ghostClass={'ghost'}
       >
@@ -80,7 +80,8 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
             nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
           >
             {
-              item.children && this.createDraggableList(item.children, `aqua-gui-main-core-area-item-${renderType}`)
+              // 这个地方必须要在渲染出来一个draggable组件给它的内部
+              item.children && this.createDraggableList(item.children, `aqua-gui-main-core-area-item-${renderType}`, 'el-row')
             }
           </AquaGUILayoutRow>
         );
