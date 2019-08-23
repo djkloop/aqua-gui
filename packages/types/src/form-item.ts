@@ -9,17 +9,19 @@ import { AquaGUILayoutColEleBase } from './item/AquaGUILayoutColBase';
 /**
  * FormItemBase
  *
- * @param name 组件名称
- * @param type ui库组件类型
- * @param children 嵌套组件
+ * @param renderName 组件名称
+ * @param renderType ui库组件类型
+ * @param children 子组件嵌套组件
  * @param componentType 组件的类型
+ * @param renderComponentTag ui库要渲染的组件标签tag名
  *
  */
 interface FormItemBase {
-    children?: RenderProps[];
-    renderType?: string;
     renderName?: string;
+    renderType?: string;
+    children?: FormItemBase[];
     componentType?: string;
+    renderComponentTag?: string;
 }
 
 /**

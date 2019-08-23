@@ -67,38 +67,66 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
     );
   }
 
-  private createDraggableLayout(item: RenderProps, index: number) {
+  private createDraggableLayout(item: any, index: number) {
     const { renderType } = item;
+    console.log(item);
     if (renderType === 'row') {
         return (
-          <AquaGUILayoutRow
-            id={item.renderName + '_' + index + '_' + item.id}
-            data-key={item.renderName + '_' + index + '_' + item.id}
-            key={item.renderName + '_' + index + '_' + item.id}
-            class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
-            item={item}
-            nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
-          >
-            {
-              // 这个地方必须要在渲染出来一个draggable组件给它的内部
-              item.children && this.createDraggableList(item.children, `aqua-gui-main-core-area-item-${renderType}`, 'el-row')
-            }
-          </AquaGUILayoutRow>
+            <Draggable
+                onAdd={this.handleOnAdd}
+                group={ { name: 'widget' } }
+                ghostClass={'ghost'}
+                tag={'el-row'}
+                class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
+                data-key={item.renderName + '_' + index + '_' + item.id}
+                key={item.renderName + '_' + index + '_' + item.id}
+                nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
+                componentData={{...{props: { gutter: item.gutter, type: item.type, justify: item.justify, align: item.align, tag: item.tag }}}}
+            >
+            </Draggable>
+          // <AquaGUILayoutRow
+          //   id={item.renderName + '_' + index + '_' + item.id}
+          //   data-key={item.renderName + '_' + index + '_' + item.id}
+          //   key={item.renderName + '_' + index + '_' + item.id}
+          //   class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
+          //   item={item}
+          //   list={this.renderList}
+          //   nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
+          // >
+          //   {/*{*/}
+          //   {/*  // 这个地方必须要在渲染出来一个draggable组件给它的内部*/}
+          //   {/*  item.children && this.createDraggableList(item.children, `aqua-gui-main-core-area-item-${renderType}`, 'el-row')*/}
+          //   {/*}*/}
+          // </AquaGUILayoutRow>
         );
     } else if (renderType === 'col') {
       return (
-        <AquaGUILayoutCol
-          id={item.renderName + '_' + index + '_' + item.id}
-          data-key={item.renderName + '_' + index + '_' + item.id}
-          key={item.renderName + '_' + index + '_' + item.id}
-          class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
-          item={item}
-          nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
-        >
-          {
-            item.children && this.createDraggableList(item.children, `aqua-gui-main-core-area-item-${renderType}`)
-          }
-        </AquaGUILayoutCol>
+          <Draggable
+              onAdd={this.handleOnAdd}
+              group={ { name: 'widget' } }
+              ghostClass={'ghost'}
+              tag={'el-col'}
+              class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
+              data-key={item.renderName + '_' + index + '_' + item.id}
+              list={this.renderList}
+              key={item.renderName + '_' + index + '_' + item.id}
+              nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
+              componentData={{...{props: { span: item.span }}}}
+          >
+
+          </Draggable>
+        // <AquaGUILayoutCol
+        //   id={item.renderName + '_' + index + '_' + item.id}
+        //   data-key={item.renderName + '_' + index + '_' + item.id}
+        //   key={item.renderName + '_' + index + '_' + item.id}
+        //   class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
+        //   item={item}
+        //   nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
+        // >
+        //   {
+        //     item.children && this.createDraggableList(item.children, `aqua-gui-main-core-area-item-${renderType}`)
+        //   }
+        // </AquaGUILayoutCol>
       );
   }
 
