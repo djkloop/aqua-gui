@@ -4,14 +4,13 @@ import PropTypes from 'vue-types';
 import { AquaGUICoreProps, AquaGUICoreEvents, RenderProps } from '@aqua-gui/types';
 import { namespace } from 'vuex-class';
 import Draggable from 'vuedraggable';
-import { AquaGUIFormItemInput, AquaGUILayoutRow, AquaGUILayoutCol } from '../components';
+import AquaGUIRenderEngine from './AquaGUIRenderEngine';
+// import { AquaGUIFormItemInput, AquaGUILayoutRow, AquaGUILayoutCol } from '../components';
 
 const CommonModule = namespace('common');
 
 @Component
 export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUICoreEvents> {
-  public key: string | undefined = '';
-  public index: number = 0;
 
   @CommonModule.State((state) => state.selectItem) public selectItem!: any;
   @CommonModule.Mutation('setSelectItem') public setSelectItem: any;
@@ -19,17 +18,9 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
   @Prop(PropTypes.array.def([]))
   public renderList!: RenderProps[];
 
-  public handleOnAdd(e: any, type: string) {
-    this.$emit('add', e);
-    // 默认选中添加进去的
-    this.key = this.selectItem.id;
-  }
-
-  public handleClick(e: Event, item: RenderProps, index: number) {
-    e.stopPropagation();
-    this.key = item.id;
-    this.index = index;
-    this.setSelectItem(item);
+  public handleOnAdd(item: any) {
+    console.log(item, ' aaa-aaa');
+    this.$emit('add', item);
   }
 
   public render() {
@@ -40,119 +31,13 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
     );
   }
 
-  public createDraggableList(renderList: RenderProps[], clsName?: string, tagEle?: string) {
+  public createDraggableList(renderList: RenderProps[]) {
     return (
-      <Draggable
-        onAdd={this.handleOnAdd}
-        class={`${clsName ? '这是二次渲染的组件-class-能拖拽的组件必须有这一级才能拖拽-但是真正有属性的组件还在最外层' : 'aqua-gui-main-core-area'}`}
-        animation={100}
+      <AquaGUIRenderEngine
         list={renderList}
-        tag={clsName ? tagEle : 'div'}
-        group={ { name: 'widget' } }
-        ghostClass={'ghost'}
-      >
-        {
-          renderList.map((item, index) => {
-            const { componentType } = item;
-            if (componentType === 'layout') {
-              if (item.children) {
-                return this.createDraggableLayout(item, index);
-              }
-            } else {
-              return this.createDraggableFormItem(item, index);
-            }
-          })
-        }
-      </Draggable>
+        onSet={this.handleOnAdd}
+      />
     );
-  }
-
-  private createDraggableLayout(item: any, index: number) {
-    const { renderType } = item;
-    console.log(item);
-    if (renderType === 'row') {
-        return (
-            <Draggable
-                onAdd={this.handleOnAdd}
-                group={ { name: 'widget' } }
-                ghostClass={'ghost'}
-                tag={'el-row'}
-                class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
-                data-key={item.renderName + '_' + index + '_' + item.id}
-                key={item.renderName + '_' + index + '_' + item.id}
-                nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
-                componentData={{...{props: { gutter: item.gutter, type: item.type, justify: item.justify, align: item.align, tag: item.tag }}}}
-            >
-            </Draggable>
-          // <AquaGUILayoutRow
-          //   id={item.renderName + '_' + index + '_' + item.id}
-          //   data-key={item.renderName + '_' + index + '_' + item.id}
-          //   key={item.renderName + '_' + index + '_' + item.id}
-          //   class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
-          //   item={item}
-          //   list={this.renderList}
-          //   nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
-          // >
-          //   {/*{*/}
-          //   {/*  // 这个地方必须要在渲染出来一个draggable组件给它的内部*/}
-          //   {/*  item.children && this.createDraggableList(item.children, `aqua-gui-main-core-area-item-${renderType}`, 'el-row')*/}
-          //   {/*}*/}
-          // </AquaGUILayoutRow>
-        );
-    } else if (renderType === 'col') {
-      return (
-          <Draggable
-              onAdd={this.handleOnAdd}
-              group={ { name: 'widget' } }
-              ghostClass={'ghost'}
-              tag={'el-col'}
-              class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
-              data-key={item.renderName + '_' + index + '_' + item.id}
-              list={this.renderList}
-              key={item.renderName + '_' + index + '_' + item.id}
-              nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
-              componentData={{...{props: { span: item.span }}}}
-          >
-
-          </Draggable>
-        // <AquaGUILayoutCol
-        //   id={item.renderName + '_' + index + '_' + item.id}
-        //   data-key={item.renderName + '_' + index + '_' + item.id}
-        //   key={item.renderName + '_' + index + '_' + item.id}
-        //   class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
-        //   item={item}
-        //   nativeOn-click={(e: Event) => this.handleClick(e, item, index)}
-        // >
-        //   {
-        //     item.children && this.createDraggableList(item.children, `aqua-gui-main-core-area-item-${renderType}`)
-        //   }
-        // </AquaGUILayoutCol>
-      );
-  }
-
-
-  }
-
-  private createDraggableFormItem(item: RenderProps, index: number) {
-    return (
-      <div
-        class={{'aqua-gui-main-core-area-item': true, 'active': this.key === item.id}}
-        key={item.renderName + '_' + index + '_' + item.id}
-        data-key={item.renderName + '_' + index + '_' + item.id}
-        onClick={(e) => this.handleClick(e, item, index)}
-      >
-        { this.createFormItem(item) }
-      </div>
-  );
-  }
-
-
-  private createFormItem(item: RenderProps) {
-    // 输入框
-    const { renderType } = item;
-    if (renderType === 'input') {
-      return <AquaGUIFormItemInput item={item}/>;
-    }
   }
 }
 

@@ -14,9 +14,8 @@ export default class AquaGUILayoutCol extends tsx.Component<Col> {
   public item!: AquaGUILayoutColProps;
 
   public render() {
-    const { span} = this.item;
     return(
-      <el-col {...{props: { span }}}>
+      <el-col>
         { this.$slots.default }
       </el-col>
     );

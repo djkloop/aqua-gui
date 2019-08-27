@@ -48,7 +48,6 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
   // TODO: 这个地方也是组件类型越多越没办法写。
   // TODO: 因为每个组件的类型不同这里不知道有没有更好的实现方案.
   public render() {
-    this.findRenderListItem(this.getSelectedItem);
     const { renderType } = this.getSelectedItem;
     return (
 
@@ -59,17 +58,17 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
           <div>
             <el-form-item label='栅格间隔'>
               <el-input-number
-                v-model={this.res.gutter}
+                v-model={this.getSelectedItem.componentsProps.props.gutter}
                 min={0}
               />
             </el-form-item>
             <el-form-item label='布局模式(可选 flex，现代浏览器下有效)'>
-              <el-select v-model={this.res.type} placeholder='布局模式'>
+              <el-select v-model={this.getSelectedItem.componentsProps.props.type} placeholder='布局模式'>
                 <el-option label={'flex'} value={'flex'} />
               </el-select>
             </el-form-item>
             {
-              this.renderFlexChild(this.res.type)
+              this.renderFlexChild(this.getSelectedItem.componentsProps.props.type)
             }
           </div>
           :
@@ -82,8 +81,8 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
             <div>
               <el-form-item label='span'>
                 <el-input-number
-                  key={this.res.id}
-                  v-model={this.res.span}
+                  key={this.getSelectedItem.componentsProps.props.id}
+                  v-model={this.getSelectedItem.componentsProps.props.span}
                   min={0}
                   max={24}
                 />
@@ -101,7 +100,7 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
       return (
           <div>
             <el-form-item label='justify'>
-              <el-select v-model={this.res.justify} placeholder='flex 布局下的水平排列方式'>
+              <el-select v-model={this.getSelectedItem.componentsProps.props.justify} placeholder='flex 布局下的水平排列方式'>
                 {
                   this.justifyList.map((item) => {
                     return <el-option  label={item} value={item} />;
@@ -110,7 +109,7 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
               </el-select>
             </el-form-item>
             <el-form-item label='align'>
-              <el-select v-model={this.res.align} placeholder='布局模式(可选 flex，现代浏览器下有效)'>
+              <el-select v-model={this.getSelectedItem.componentsProps.props.align} placeholder='布局模式(可选 flex，现代浏览器下有效)'>
                 {
                   this.alignList.map((item) => {
                     return <el-option  label={item} value={item} />;

@@ -16,7 +16,7 @@ import { AquaGUILayoutColEleBase } from './item/AquaGUILayoutColBase';
  * @param renderComponentTag ui库要渲染的组件标签tag名
  *
  */
-interface FormItemBase {
+export interface FormItemBase {
     renderName?: string;
     renderType?: string;
     children?: FormItemBase[];

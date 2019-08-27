@@ -11,7 +11,10 @@ export default {
           justify: 'start',
           align: 'middle',
           tag: 'div',
-        }
+        },
+      },
+      customProps: {
+        showLabel: true,
       },
       children: [],
       componentType: 'layout',
@@ -24,16 +27,11 @@ export default {
       renderComponentTag: 'el-col',
       componentsProps: {
         props: {
-          gutter: 1,
-          type: 'flex',
-          justify: 'start',
-          align: 'middle',
-          tag: 'div',
-        }
+          span: 6,
+        },
       },
       children: [],
       componentType: 'layout',
-      span: 6,
     },
   ],
   // basicComponents: [
