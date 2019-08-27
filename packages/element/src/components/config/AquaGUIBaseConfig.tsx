@@ -65,6 +65,7 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
             <el-form-item label='布局模式(可选 flex，现代浏览器下有效)'>
               <el-select v-model={this.getSelectedItem.componentsProps.props.type} placeholder='布局模式'>
                 <el-option label={'flex'} value={'flex'} />
+                <el-option label={'默认'} value={''} />
               </el-select>
             </el-form-item>
             {
