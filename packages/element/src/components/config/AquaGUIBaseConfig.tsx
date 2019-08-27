@@ -83,7 +83,7 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
           renderType === 'col'
             ?
             <div>
-              <el-form-item label='span'>
+              <el-form-item label='栅格占据的列数(span)'>
                 <el-slider
                   key={this.getSelectedItem.componentsProps.props.id}
                   v-model={this.getSelectedItem.componentsProps.props.span}
