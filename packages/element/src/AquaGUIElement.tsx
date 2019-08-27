@@ -53,6 +53,9 @@ export default class AquaGUIElement extends Vue {
             <AquaGUIRenderConfig />
           </el-aside>
         </el-container>
+        <el-footer class={'aqua-gui-footer'}>
+          <p>AquaGUIElement-v{Config.LAYOUT.FOOTER.VERSION}</p>
+        </el-footer>
       </el-container>
     );
   }

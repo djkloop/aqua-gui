@@ -23,7 +23,7 @@ export default class AquaGUIHeader extends tsx.Component<AquaGUIHeaderProps> {
                 src={require(`../assets/${this.theme}-logo.svg`)}
               />
               <span>
-                VersatileGUI-{this.theme}
+                AquaGUI-{this.theme}
               </span>
             </a>
           </h1>
