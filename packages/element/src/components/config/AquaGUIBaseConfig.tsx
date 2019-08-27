@@ -63,10 +63,13 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
               />
             </el-form-item>
             <el-form-item label='布局模式(可选 flex，现代浏览器下有效)'>
-              <el-select v-model={this.getSelectedItem.componentsProps.props.type} placeholder='布局模式'>
-                <el-option label={'flex'} value={'flex'} />
-                <el-option label={'默认'} value={''} />
-              </el-select>
+              <el-switch
+                v-model={this.getSelectedItem.componentsProps.props.type }
+                activeText={'开启'}
+                inactiveText={'关闭'}
+                activeValue={'flex'}
+                inactiveValue={' '}
+              />
             </el-form-item>
             {
               this.renderFlexChild(this.getSelectedItem.componentsProps.props.type)
@@ -81,12 +84,13 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
             ?
             <div>
               <el-form-item label='span'>
-                <el-input-number
+                <el-slider
                   key={this.getSelectedItem.componentsProps.props.id}
                   v-model={this.getSelectedItem.componentsProps.props.span}
                   min={0}
                   max={24}
-                />
+                  showInput={true}>
+                </el-slider>
               </el-form-item>
             </div>
             :

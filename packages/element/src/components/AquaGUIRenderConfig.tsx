@@ -9,12 +9,12 @@ export default class AquaGUIRenderConfig extends tsx.Component<{}> {
   public render() {
     return (
       <el-collapse v-model={this.activeAllNames}>
-        <el-collapse-item title='基础属性' name='1'>
+        <el-collapse-item class={'config-item'} title='基础属性' name='1'>
           <AquaGUIBaseConfig />
         </el-collapse-item>
-        <el-collapse-item title='标签设置' name='2'>
+        <el-collapse-item class={'config-item'} title='标签设置' name='2'>
         </el-collapse-item>
-        <el-collapse-item title='外观样式' name='3'>
+        <el-collapse-item class={'config-item'} title='外观样式' name='3'>
         </el-collapse-item>
       </el-collapse>
     );
