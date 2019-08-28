@@ -28,15 +28,10 @@ export default class AquaGUIVue extends tsx.Component<AquaGUIVueProps> {
   @Prop(PropTypes.array.def([]))
   public list!: RenderProps[];
 
-  public handleEmitAdd(e: any) {
-    this.setSelectItem(this.renderItemData);
-  }
-
   public render() {
     return (
       <div class={'aqua-gui-main-data'}>
         <AquaGUICore
-          onAdd={this.handleEmitAdd}
           renderList={this.list}
         />
       </div>
