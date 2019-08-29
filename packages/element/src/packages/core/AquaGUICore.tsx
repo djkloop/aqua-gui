@@ -18,6 +18,10 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
   @Prop(PropTypes.array.def([]))
   public renderList!: RenderProps[];
 
+  public handleEmitAdd() {
+    this.$emit('add');
+  }
+
   public render() {
     return (
       <div class={'aqua-gui-main-core'}>
@@ -30,6 +34,7 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
     return (
       <AquaGUIRenderEngine
         list={renderList}
+        onAdd={this.handleEmitAdd}
       />
     );
   }

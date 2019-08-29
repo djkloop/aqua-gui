@@ -69,6 +69,7 @@ export default class AquaGUIRenderEngine extends tsx.Component<AquaGUIRenderEngi
     //   'renderId: ', this.renderId,
     //   'sel-id: ', this.selectItem.id,
     //   );
+    console.log(this.renderItemData.id);
     return (
       <Draggable
         class={{
@@ -77,25 +78,20 @@ export default class AquaGUIRenderEngine extends tsx.Component<AquaGUIRenderEngi
           [`r_id_${this.renderId}`]: true,
           [`r_i_id_${this.renderItemData.id}`]: true,
         }}
-        data-id={this.renderId}
         data-idx={this.idx}
         nativeOn-click={(e: Event) => this.handleClick(e, this.renderName, this.renderItem)}
         data-name={this.renderName}
         list={this.list}
-        swapThreshold={0.5}
         data-selectId={this.selectItem.id}
         animation={100}
-        key={this.renderItemData.id}
         tag={this.renderComponentTag}
         group={ {name: 'widget' }}
         componentData={this.componentsProps}
-        onAdd={this.handleClick}
       >
         {
           this.list.map((item: any, idx) => {
             return (<AquaGUIRenderEngine
               idx={idx + '_' + item.renderName + '_' + item.id}
-              key={item.id}
               renderName={item.renderName}
               list={item.children}
               renderId={item.id}
