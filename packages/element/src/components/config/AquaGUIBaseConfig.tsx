@@ -1,9 +1,6 @@
 import * as tsx from 'vue-tsx-support';
-import { Component, Prop } from 'vue-property-decorator';
-import PropTypes from 'vue-types';
-import { RenderProps } from '@aqua-gui/types';
+import { Component } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-import { isEmpty } from '@aqua-gui/utils';
 const CommonModule = namespace('common');
 
 
@@ -16,34 +13,6 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
   public justifyList: string[] = ['start', 'end', 'center', 'space-around', 'space-between'];
   // alignList
   public alignList: string[] = ['top', 'middle', 'bottom'];
-
-  private res: any = {};
-
-  public findRenderListItem(item: RenderProps) {
-    // 如果直接是个空对象直接返回一个空对象
-    if (isEmpty(item)) { return {}; }
-    if (item.id) {
-      this.findIdItem(this.getRenderList, item.id);
-    } else {
-      return {};
-    }
-  }
-
-  // 递归去找到唯一的那个renderList里面的item
-  // TODO: 这个地方太消耗性能了，要想办法优化
-  public findIdItem(list: RenderProps[], id: string) {
-    for (let i = 0; i < list.length; i++) {
-      const item = list[i];
-      if (item.children && item.children.length > 0) {
-        this.findIdItem(item.children, id);
-      }
-      if (item.id === id) {
-        this.res = item;
-        break;
-      }
-    }
-  }
-
 
   // TODO: 这个地方也是组件类型越多越没办法写。
   // TODO: 因为每个组件的类型不同这里不知道有没有更好的实现方案.
@@ -78,7 +47,6 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
           :
           null
         }
-
         {
           renderType === 'col'
             ?
@@ -87,7 +55,7 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
                 <el-slider
                   key={this.getSelectedItem.componentsProps.props.id}
                   v-model={this.getSelectedItem.componentsProps.props.span}
-                  min={0}
+                  min={1}
                   max={24}
                   showInput={true}>
                 </el-slider>
@@ -96,10 +64,64 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
             :
             null
         }
+        {
+          renderType === 'input'
+          ?
+          <div>
+            <el-form-item label='是否显示label'>
+              <el-switch
+                v-model={this.getSelectedItem.customProps.showLabel}
+                activeText={'开启'}
+                inactiveText={'关闭'}
+                activeValue={true}
+                inactiveValue={false}
+              />
+            </el-form-item>
+            {
+              this.getSelectedItem.customProps.showLabel &&
+              (
+                <el-form-item  label='label名称'>
+                  <el-input
+                    v-model={this.getSelectedItem.componentsProps.props.label}
+                  />
+                </el-form-item>
+              )
+            }
+            <el-form-item label='默认值'>
+              <el-input
+                maxlength={this.getSelectedItem.componentsProps.attrs.maxlength}
+                v-model={this.getSelectedItem.componentsProps.props.value}
+              />
+            </el-form-item>
+            <el-form-item label='提示语'>
+              <el-input
+                v-model={this.getSelectedItem.componentsProps.attrs.placeholder}
+              />
+            </el-form-item>
+            <el-form-item label='是否可清空'>
+              <el-switch
+                v-model={this.getSelectedItem.componentsProps.props.clearable}
+                activeText={'开启'}
+                inactiveText={'关闭'}
+                activeValue={true}
+                inactiveValue={false}
+              />
+            </el-form-item>
+            <el-form-item label='最大输入长度'>
+                <el-input-number
+                v-model={this.getSelectedItem.componentsProps.attrs.maxlength}
+                min={0}
+              />
+              </el-form-item>
+          </div>
+          :
+          null
+        }
       </el-form>
     );
   }
 
+  // 布局子组件
   private renderFlexChild(type: string) {
     if (type === 'flex') {
       return (
@@ -114,7 +136,10 @@ export default class AquaGUIBaseConfig extends tsx.Component<{}> {
               </el-select>
             </el-form-item>
             <el-form-item label='align'>
-              <el-select v-model={this.getSelectedItem.componentsProps.props.align} placeholder='布局模式(可选 flex，现代浏览器下有效)'>
+              <el-select
+                v-model={this.getSelectedItem.componentsProps.props.align}
+                placeholder='布局模式(可选 flex，现代浏览器下有效)'
+              >
                 {
                   this.alignList.map((item) => {
                     return <el-option  label={item} value={item} />;

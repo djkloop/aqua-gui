@@ -22,6 +22,9 @@ export interface FormItemBase {
     children?: FormItemBase[];
     componentType?: string;
     renderComponentTag?: string;
+     customProps?: {
+        showLabel?: boolean;
+    },
 }
 
 /**

@@ -1,5 +1,5 @@
 import * as tsx from 'vue-tsx-support';
-import {Prop, Component, InjectReactive} from 'vue-property-decorator';
+import { Prop, Component, InjectReactive } from 'vue-property-decorator';
 import PropTypes from 'vue-types';
 import Draggable from 'vuedraggable';
 import { FormItemBase } from '@aqua-gui/types';
@@ -70,44 +70,88 @@ export default class AquaGUIRenderEngine extends tsx.Component<AquaGUIRenderEngi
    *
    */
   public handleOnChange(e: any) {
-    this.setSelectItem(e.added.element);
+    if (e.added) {
+      this.setSelectItem(e.added.element);
+    }
+    return e;
   }
 
   public render() {
     return (
-      <Draggable
-        class={{
-          [`aqua-gui-main-core-area${this.idx === '' ? '' : '-item'}`]: true,
-          active: this.renderId === this.selectItem.id,
-          [`r_id_${this.renderId}`]: true,
-          [`r_i_id_${this.renderItemData.id}`]: true,
-        }}
-        onChange={(e: Event) => this.handleOnChange(e)}
-        data-idx={this.idx}
-        nativeOn-click={(e: Event) => this.handleClick(e, this.renderName, this.renderItem)}
-        data-name={this.renderName}
-        list={this.list}
-        data-selectId={this.selectItem.id}
-        animation={100}
-        tag={this.renderComponentTag}
-        group={ {name: 'widget' }}
-        componentData={this.componentsProps}
-      >
-        {
-          this.list.map((item: any, idx) => {
-            return (<AquaGUIRenderEngine
-              idx={idx + '_' + item.renderName + '_' + item.id}
-              renderName={item.renderName}
-              list={item.children}
-              renderId={item.id}
-              renderComponentTag={item.renderComponentTag}
-              renderItem={item}
-              componentsProps={item.componentsProps}
-            >
-            </AquaGUIRenderEngine>);
-          })
-        }
-      </Draggable>
+
+      this.renderItem.componentType === 'layout' || this.idx === ''
+        ?
+        <Draggable
+          class={{
+            [`aqua-gui-main-core-area${this.idx === '' ? '' : '-item'}`]: true,
+            active: this.renderId === this.selectItem.id,
+            [`r_id_${this.renderId}`]: true,
+            [`r_i_id_${this.renderItemData.id}`]: true,
+          }}
+          onChange={(e: Event) => this.handleOnChange(e)}
+          data-idx={this.idx}
+          nativeOn-click={(e: Event) => this.handleClick(e, this.renderName, this.renderItem)}
+          data-name={this.renderName}
+          list={this.list}
+          data-selectId={this.selectItem.id}
+          animation={100}
+          tag={this.renderComponentTag}
+          group={{ name: 'widget' }}
+          componentData={this.componentsProps}
+        >
+          {
+            this.list.map((item: any, idx) => {
+              return (<AquaGUIRenderEngine
+                idx={idx + '_' + item.renderName + '_' + item.id}
+                renderName={item.renderName}
+                list={item.children}
+                renderId={item.id}
+                renderComponentTag={item.renderComponentTag}
+                renderItem={item}
+                componentsProps={item.componentsProps}
+              >
+              </AquaGUIRenderEngine>);
+            })
+          }
+        </Draggable>
+        :
+        <el-form-item
+          label={this.renderItem.customProps!.showLabel ? this.componentsProps.props.label : ''}>
+          <Draggable
+            class={{
+              [`aqua-gui-main-core-area${this.idx === '' ? '' : '-item'}`]: true,
+              active: this.renderId === this.selectItem.id,
+              [`r_id_${this.renderId}`]: true,
+              [`r_i_id_${this.renderItemData.id}`]: true,
+            }}
+            data-show={JSON.stringify(this.renderItem)}
+            onChange={(e: Event) => this.handleOnChange(e)}
+            data-idx={this.idx}
+            nativeOn-click={(e: Event) => this.handleClick(e, this.renderName, this.renderItem)}
+            data-name={this.renderName}
+            list={this.list}
+            data-selectId={this.selectItem.id}
+            animation={100}
+            tag={this.renderComponentTag}
+            group={{ name: 'widget' }}
+            componentData={this.componentsProps}
+          >
+            {
+              this.list.map((item: any, idx) => {
+                return (<AquaGUIRenderEngine
+                  idx={idx + '_' + item.renderName + '_' + item.id}
+                  renderName={item.renderName}
+                  list={item.children}
+                  renderId={item.id}
+                  renderComponentTag={item.renderComponentTag}
+                  renderItem={item}
+                  componentsProps={item.componentsProps}
+                >
+                </AquaGUIRenderEngine>);
+              })
+            }
+          </Draggable>
+        </el-form-item>
     );
   }
 }

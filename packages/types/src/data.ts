@@ -6,6 +6,9 @@ export interface RenderProps {
     renderType?: string;
     renderName?: string;
     componentType?: string;
+    customProps?: {
+        showLabel?: boolean;
+    }
 }
 
 

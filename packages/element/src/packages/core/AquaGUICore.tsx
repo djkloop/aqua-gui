@@ -31,9 +31,11 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
 
   public createDraggableList(renderList: RenderProps[]) {
     return (
-      <AquaGUIRenderEngine
-        list={renderList}
-      />
+      <el-form style={{height: '100%'}}>
+        <AquaGUIRenderEngine
+          list={renderList}
+        />
+      </el-form>
     );
   }
 }
