@@ -62,22 +62,27 @@ export default class AquaGUIRenderEngine extends tsx.Component<AquaGUIRenderEngi
     e.stopPropagation();
   }
 
+  /**
+   * handleOnChange
+   *
+   * 用change吧
+   * add事件貌似有点问题
+   *
+   */
+  public handleOnChange(e: any) {
+    this.setSelectItem(e.added.element);
+  }
+
   public render() {
-    // console.log(
-    //   'bool: ', this.renderId === this.selectItem.id,
-    //   'onlyId: ', this.renderOnlyId,
-    //   'renderId: ', this.renderId,
-    //   'sel-id: ', this.selectItem.id,
-    //   );
-    console.log(this.renderItemData.id);
     return (
       <Draggable
         class={{
           [`aqua-gui-main-core-area${this.idx === '' ? '' : '-item'}`]: true,
-          active: this.renderItemData.id === this.renderId,
+          active: this.renderId === this.selectItem.id,
           [`r_id_${this.renderId}`]: true,
           [`r_i_id_${this.renderItemData.id}`]: true,
         }}
+        onChange={(e: Event) => this.handleOnChange(e)}
         data-idx={this.idx}
         nativeOn-click={(e: Event) => this.handleClick(e, this.renderName, this.renderItem)}
         data-name={this.renderName}

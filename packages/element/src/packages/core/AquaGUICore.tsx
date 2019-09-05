@@ -1,9 +1,8 @@
-import {Component, Prop, Watch} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 import * as tsx from 'vue-tsx-support';
 import PropTypes from 'vue-types';
 import { AquaGUICoreProps, AquaGUICoreEvents, RenderProps } from '@aqua-gui/types';
 import { namespace } from 'vuex-class';
-import Draggable from 'vuedraggable';
 import AquaGUIRenderEngine from './AquaGUIRenderEngine';
 // import { AquaGUIFormItemInput, AquaGUILayoutRow, AquaGUILayoutCol } from '../components';
 
@@ -34,7 +33,6 @@ export default class AquaGUICore extends tsx.Component<AquaGUICoreProps, AquaGUI
     return (
       <AquaGUIRenderEngine
         list={renderList}
-        onAdd={this.handleEmitAdd}
       />
     );
   }

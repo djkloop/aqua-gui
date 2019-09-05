@@ -9,7 +9,7 @@ const CommonModule = namespace('common');
 
 @Component
 export default class AquaGUIBaseConfig extends tsx.Component<{}> {
-  @CommonModule.Getter('_selectItem') public getSelectedItem!: any;
+  @CommonModule.State((state) => state.selectItem) public getSelectedItem!: any;
   @CommonModule.Getter('_getRenderList') public getRenderList!: any;
 
   // justifyList
